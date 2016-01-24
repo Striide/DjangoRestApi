@@ -1,0 +1,31 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+script = <<SCRIPT
+sudo apt-get update
+sudo apt-get -y install python-pip
+sudo apt-get -y install build-essential python-dev
+
+sudo pip install django
+sudo pip install djangorestframework
+sudo pip install markdown       # Markdown support for the browsable API.
+sudo pip install django-filter  # Filtering support
+
+sudo pip install -r requirements.txt
+
+sudo apt-get install -y mongodb-server
+sudo pip install -U mongoengine
+SCRIPT
+
+Vagrant.configure(2) do |config|
+
+  config.vm.box = "ubuntu/trusty32"
+  config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-vagrant-disk1.box"
+
+  config.vm.network "forwarded_port", guest: 8000, host: 8088
+  config.vm.synced_folder "../", "/workspace"
+
+  config.vm.provision "shell", inline: script
+
+end
