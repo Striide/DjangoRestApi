@@ -11,6 +11,8 @@ sudo pip install django
 sudo pip install djangorestframework
 sudo pip install markdown       # Markdown support for the browsable API.
 sudo pip install django-filter  # Filtering support
+sudo pip install pygments
+sudo pip install httpie
 
 sudo pip install -r requirements.txt
 

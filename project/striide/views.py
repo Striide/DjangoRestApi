@@ -2,8 +2,15 @@ from django.shortcuts import render
 
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from striide.serializers import UserSerializer, GroupSerializer
+from striide.serializers import UserSerializer, GroupSerializer, SnippetSerializer
+from striide.models import Snippet
 
+class SnippetViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows snippets to be viewed or edited.
+    """
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     """
